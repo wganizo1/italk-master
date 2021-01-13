@@ -24,8 +24,8 @@ class CalculateController extends GetxController {
 
   @override
   void onInit() {
-    firstNumberController = TextEditingController();
-    secondNumberController = TextEditingController();
+    firstNumberController = TextEditingController(text: box.read('firstNumber'));
+    secondNumberController = TextEditingController(text: box.read('secondNumber'));
     super.onInit();
   }
 
@@ -53,7 +53,9 @@ class CalculateController extends GetxController {
           firstNumberController.text.trim(),
           secondNumberController.text.trim());
 
-      // history = box.read('history');
+      box.write("firstNumber", firstNumberController.text.trim());
+      box.write("secondNumber", secondNumberController.text.trim());
+
       history.add(result.value);
       box.write('history', history);
 
