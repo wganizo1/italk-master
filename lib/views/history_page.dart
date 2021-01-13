@@ -14,13 +14,18 @@ class HistoryPage extends StatelessWidget {
       body: Center(
         child: Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Image.network('https://www.italkptt.com/images/iTALKPTT-Logo-White.png'),
+              ),
+
               for (var item in box.read('history'))
                 Text(
                   item,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 )
             ],
           ),

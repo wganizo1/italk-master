@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -25,9 +27,13 @@ class CalculatorBody extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Image.network('https://www.italkptt.com/images/iTALKPTT-Logo-White.png'),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'iTalk Calculator',
+                      'Calculator APP',
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
                     ),
                   ),
@@ -53,6 +59,12 @@ class CalculatorBody extends StatelessWidget {
                       // initialValue: box1.read("secondNumber"),
                     ),
                   ),
+                  Obx(
+                        () => Text(
+                      "${controller.result.value}",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -64,10 +76,28 @@ class CalculatorBody extends StatelessWidget {
                           box1.write("secondNumber", controller.secondNumberController.text);
                           print(box1.read("firstNumber"));
                           print(box1.read("secondNumber"));
-
                           controller.calculate();
+                          FocusScope.of(context).unfocus();
                         },
                         child: Text('Calculate', style: TextStyle(fontSize: 20),),
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: BorderSide(color: Colors.blue)),
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 280,
+                      height: 50,
+                      child: MaterialButton(
+                        onPressed: () {
+                          Get.toNamed('/history_page');
+                        },
+                        child: Text('History', style: TextStyle(fontSize: 20),),
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
@@ -78,12 +108,7 @@ class CalculatorBody extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Obx(
-                    () => Text(
-                      "${controller.result.value}",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
+
                 ],
               ),
             ),

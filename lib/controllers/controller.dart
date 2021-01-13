@@ -55,8 +55,10 @@ class CalculateController extends GetxController {
 
       box.write("firstNumber", firstNumberController.text.trim());
       box.write("secondNumber", secondNumberController.text.trim());
+      DateTime now = DateTime.now();
 
-      history.add(result.value);
+      String tym = "${now.year.toString()}-${now.month.toString().padLeft(2,'0')}-${now.day.toString().padLeft(2,'0')} ${now.hour.toString()}:${DateTime.now().minute}";
+      history.add(tym + ' --> ' +result.value );
       box.write('history', history);
 
       firstNumberController.clear();

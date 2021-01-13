@@ -5,18 +5,6 @@ import 'package:iTalk/widgets/calculator_body.dart';
 
 class HomePage extends StatelessWidget {
 
-  void handleClick(String value) {
-    switch (value) {
-      case 'Change Theme':
-        Get.changeTheme(
-            Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
-        break;
-      case 'Settings':
-        print("Settings");
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CalculateController());
@@ -24,25 +12,12 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('iTalk'),
         actions: [
-          // IconButton(
-          //   icon: Icon(Icons.star),
-          //   onPressed: () {
-          //     // controller.changeTheme(false);
-          //     Get.changeTheme(
-          //         Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
-          //   },
-          // ),
-          PopupMenuButton<String>(
-            onSelected: handleClick,
-            itemBuilder: (BuildContext context) {
-              return {'Change Theme', 'Settings'}.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          ),
+           IconButton(
+             icon: Icon(Icons.settings),
+             onPressed: () {
+               _showOptionsMenu(context);
+             },
+           ),
         ],
       ),
       body: Column(
@@ -50,23 +25,44 @@ class HomePage extends StatelessWidget {
           Expanded(flex:4 ,child: CalculatorBody()),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(bottom:32.0),
-              child: Container(
+              padding: const EdgeInsets.only(bottom:0.0),
 
-                child: GestureDetector(
-                onTap: () {
-                Get.toNamed('/history_page');
-                },
-                  // shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(18.0),
-                  //     side: BorderSide(color: Colors.blue)),
-                child: Text('View History', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
-              ),
-              ),
             ),
           ),
         ],
       ),
     );
+  }
+  Future<void> _showOptionsMenu(BuildContext context) async {
+    int selected = await showMenu(
+      position: RelativeRect.fromLTRB(100, 30, 18, 0),
+      context: context,
+      items: [
+        PopupMenuItem(
+          value: 0,
+          child: Row(
+            children: [
+              Icon(Icons.edit),
+              Text("Change Theme"),
+            ],
+          ),
+        ),
+        PopupMenuItem(
+          value: 1,
+          child: Row(
+            children: [
+              Icon(Icons.settings),
+              Text("More Settings"),
+            ],
+          ),
+        ),
+      ],
+    );
+    if (selected == 0) {
+      Get.changeTheme(
+          Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+    } else {
+      print('More');
+    }
   }
 }
