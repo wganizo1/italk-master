@@ -22,23 +22,13 @@ class HomePage extends StatelessWidget {
         title: Text('iTalk'),
         actions: [
           IconButton(
-            icon: Icon(Icons.star),
+            icon: Icon(Icons.settings),
             onPressed: () {
               // controller.changeTheme(false);
               Get.changeTheme(
                   Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
             },
-          ),
-          PopupMenuButton<String>(
-            onSelected: handleClick,
-            itemBuilder: (BuildContext context) {
-              return {'Logout', 'Settings'}.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
+          
           ),
         ],
       ),
