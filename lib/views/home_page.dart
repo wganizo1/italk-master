@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
               Get.changeTheme(
                   Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
             },
-          
+
           ),
         ],
       ),

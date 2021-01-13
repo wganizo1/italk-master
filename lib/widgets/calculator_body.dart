@@ -67,7 +67,7 @@ class CalculatorBody extends StatelessWidget {
 
                           controller.calculate();
                         },
-                        child: Text('Add', style: TextStyle(fontSize: 20),),
+                        child: Text('Calculate', style: TextStyle(fontSize: 20),),
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
